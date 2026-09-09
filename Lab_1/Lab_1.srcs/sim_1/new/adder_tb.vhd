@@ -45,7 +45,7 @@ architecture Sim of adder_tb is
     signal sum : std_logic_vector(4 downto 1);
     signal c4 : std_logic;
 begin
-    uut : entity work.adder_par
+    uut : entity work.adder_cons
     port map (
     a => a,
     b => b,
