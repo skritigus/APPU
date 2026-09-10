@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 09/04/2026 01:30:24 AM
+-- Create Date: 09/04/2026 01:20:02 AM
 -- Design Name: 
--- Module Name: D2 - Behavioral
+-- Module Name: D1 - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,22 +31,28 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity D2 is
-    Port (d : in std_logic;
+entity JK1 is
+    Port (j : in std_logic;
+          k : in std_logic;
           clk : in std_logic;
+          r : in std_logic;
+          q : out std_logic;
           not_q : out std_logic);
-end D2;
+end JK1;
 
-architecture Behavioral of D2 is
+architecture Behavioral of JK1 is
     signal data : std_logic;
 begin
-    process(clk)
+    process(clk, r)
     begin
-        if(falling_edge(clk)) then
-            data <= d;
+        if (r  = '0') then
+            data <= '0';
+        elsif(falling_edge(clk)) then
+            data <= (j and not data) or (data and not k);
         end if;
     end process;
-
-    not_q <= not data;
     
+    q <= data;
+    not_q <= not data;
+
 end Behavioral;
