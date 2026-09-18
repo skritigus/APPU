@@ -1,0 +1,58 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 09/04/2026 01:20:02 AM
+-- Design Name: 
+-- Module Name: JK1 - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity JK1 is
+    Port (j : in std_logic;
+          k : in std_logic;
+          clk : in std_logic;
+          r : in std_logic;
+          q : out std_logic;
+          q_n : out std_logic);
+end JK1;
+
+architecture Behavioral of JK1 is
+    signal data : std_logic;
+begin
+    process(clk, r)
+    begin
+        if (r  = '0') then
+            data <= '0';
+        elsif(falling_edge(clk)) then
+            data <= (j and not data) or (data and not k);
+        end if;
+    end process;
+    
+    q <= data;
+    q_n <= not data;
+
+end Behavioral;
