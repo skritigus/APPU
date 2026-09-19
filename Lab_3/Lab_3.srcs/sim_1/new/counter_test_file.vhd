@@ -115,7 +115,7 @@ begin
         
         procedure record_result(amount : in integer) is
         begin
-            for i in 0 to amount loop
+            for i in 0 to amount - 1 loop
                 wait for CLK_PERIOD;
                 write_row;
             end loop;
@@ -153,20 +153,65 @@ begin
         record_result(16);
         
         enp_n <= '1';
-        record_result(3);
+        record_result(1);
         
         ent_n <= '1';
-        record_result(3);
+        record_result(1);
 
         g_n <= '1';
-        record_result(2);
+        record_result(1);
         
         g_n <= '0';
-        wait for CLK_PERIOD;
-        write_row;
+        record_result(1);
 
         cclr_n <= '0';
         record_result(1);
+        
+        cclr_n <= '1';
+        record_result(1);
+        
+        load_n <= '1';
+        enp_n <= '0';
+        ent_n <= '1';
+        record_result(3);
+ 
+        enp_n <= '1';
+        ent_n <= '0';
+        record_result(3);
+        
+        enp_n <= '0';
+        ent_n <= '0';
+        record_result(3);
+ 
+        data_in <= x"5";
+        load_n <= '0';
+        record_result(1);
+        
+        load_n <= '1';
+        record_result(4);
+ 
+        rc <= '0';
+        record_result(3);
+        
+        rc <= '1';
+        record_result(3);
+        
+        cclr_n <= '1';
+        updown <= '1';
+        data_in <= x"E";
+        load_n <= '0';
+        record_result(1);
+ 
+        load_n <= '1';
+        record_result(2);
+ 
+        data_in <= x"1";
+        load_n <= '0';
+        updown <= '0';
+        record_result(1);
+        
+        load_n <= '1';
+        record_result(2);
         
         cclr_n <= 'U';
         data_in <= "UUUU";
